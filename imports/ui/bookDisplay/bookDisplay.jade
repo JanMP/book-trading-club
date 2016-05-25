@@ -1,0 +1,20 @@
+template(name="bookDisplay")
+  .ui.image($b="ref : imageRef")
+    img(src="#{imageLink}" style="margin-left : 0px")
+    if available
+      .ui.green.left.corner.label
+    if requesting
+      .ui.orange.ribbon.label
+        i.help.circle.icon
+        | requesting
+    if accepted
+      .ui.green.ribbon.label
+        i.thumbs.up.icon
+        | accepted
+  .ui.basic.inverted.popup
+    button.ui.blue.circular.icon.button($b="click : info")
+      i.info.icon
+    button.ui.orange.circular.icon.button($b="click : request, enable : mayRequest")
+      i.help.icon
+    button.ui.red.circular.icon.button($b="click : cancelRequest, enable : mayCancelRequest")
+      i.remove.icon

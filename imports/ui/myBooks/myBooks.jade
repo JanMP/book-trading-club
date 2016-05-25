@@ -39,15 +39,15 @@ template(name="myBookDisplay")
     img(src="#{book.imageLink}" style="margin-left : 0px")
     if requested
       .ui.orange.ribbon.label
-        i.help.icon
-        | request
+        i.help.circle.icon
+        | requested
     if accepted
       .ui.green.ribbon.label
-        i.share.icon
-        | sharing
+        i.thumbs.up.icon
+        | accepting
   .ui.basic.inverted.popup
     button.ui.red.circular.icon.button($b="click : remove")
-      i.remove.icon
+      i.trash.outline.icon
     button.ui.yellow.circular.icon.button($b="click : reject, class : { disabled : available }")
       i.thumbs.down.icon
     button.ui.green.circular.icon.button($b="click : accept, class : { disabled : available }")
@@ -61,3 +61,6 @@ template(name="myRequests")
       each requests
         +bookDisplay
         
+template(name="myRequestDisplay")
+  .ui.rounded.image($b="ref : imageRef")
+    img(src="#{book.imageLink}" style="margin-left : 0px")

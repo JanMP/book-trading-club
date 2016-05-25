@@ -1,7 +1,7 @@
 require "./layout.jade"
-require "/imports/navbar/navbar.jade"
-require "/imports/list/list.coffee"
-require "/imports/myBooks/myBooks.coffee"
+require "/imports/ui/navbar/navbar.jade"
+require "/imports/ui/list/list.coffee"
+require "/imports/ui/myBooks/myBooks.coffee"
 
 FlowRouter.route "/",
   name : "home"
@@ -13,7 +13,7 @@ FlowRouter.route "/my-books",
   name : "myBooks"
   action : ->
     BlazeLayout.render "layout",
-      main : "myBooks"
+      main : "myBooks-page"
 
 FlowRouter.route "/add-book",
   name : "addBook"

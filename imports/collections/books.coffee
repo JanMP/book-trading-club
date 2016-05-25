@@ -55,6 +55,25 @@ if Meteor.isServer
           requesterId : @userId
           status : "requested"
 
+  cancelRequest = new ValidatedMethod
+    name : "BTC.cancelRequest"
+    validate :
+      new SimpleSchema
+        bookId :
+          type : String
+      .validator()
+    run : ({ bookId }) ->
+      unless @userId
+        throw new Meteor.Error "BTC.cancelRequest unauthorized"
+      BookInstances.update
+        bookId : bookId
+        requesterId : @userId
+        status :
+          $in : ["requested", "accepted"]
+      ,
+        $set :
+          status : "available"
+
   acceptRequest = new ValidatedMethod
     name : "BTC.acceptRequest"
     validate :

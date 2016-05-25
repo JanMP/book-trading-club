@@ -2,8 +2,12 @@
 { Books, BookInstances } = require "/imports/collections/books.coffee"
 
 require "./myBooks.jade"
+require "/imports/ui/list/list.coffee"
 
 url = "https://www.googleapis.com/books/v1/volumes?q="
+
+Template.myBooks.viewmodel
+  books : -> BookInstances.find ownerId : Meteor.userId()
 
 Template.addBook.viewmodel
   query : ""
@@ -20,9 +24,6 @@ Template.addBook.viewmodel
 Template.bookPreview.viewmodel
   addBook : ->
     Meteor.call "BTC.addBook", googleId : @id()
-
-Template.listMyBooks.viewmodel
-  books : -> BookInstances.find ownerId : Meteor.userId()
 
 Template.myBookDisplay.viewmodel
   book : -> Books.findOne @bookId()
@@ -42,3 +43,18 @@ Template.myBookDisplay.viewmodel
       position : "bottom center"
       distanceAway : -80
       on : "click"
+
+Template.myRequests.viewmodel
+  requests : ->
+    requestIds =
+      BookInstances.find
+        requesterId : Meteor.userId()
+        status :
+          $in : [ "requested", "accepted" ]
+      .fetch()
+      .map (e) -> e.bookId
+    Books.find
+      _id :
+        $in : requestIds
+  gotRequests : ->
+    @requests().count() > 0
