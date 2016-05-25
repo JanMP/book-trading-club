@@ -1,0 +1,23 @@
+template(name="list")
+  .ui.text.container.segment
+    h2.header Browse Books
+    .ui.small.images(style="overflow : hidden")
+      each books
+        +bookDisplay
+        
+template(name="bookDisplay")
+  .ui.rounded.image($b="ref : imageRef")
+    img(src="#{imageLink}" style="margin-left : 0px")
+    if isAvailable
+      .ui.green.left.corner.label
+    if requesting
+      .ui.orange.ribbon.label requesting
+    if accepted
+      .ui.green.ribbon.label accepted
+  .ui.basic.inverted.popup
+    button.ui.blue.icon.button($b="click : info")
+      i.info.icon
+      | info
+    button.ui.orange.icon.button($b="click : request")
+      i.child.icon
+      | request

@@ -1,0 +1,55 @@
+template(name="myBooks")
+  .ui.clearing.container.segment
+    h2.header My Books
+      a.ui.right.floated.circular.icon.button(href="/add-book")
+        i.large.icons
+          i.book.icon
+          i.corner.plus.icon
+    .ui.clearing.hidden.divider
+    +listMyBooks
+    
+template(name="addBook")
+  .ui.text.container.segment
+    h2.header Add a Book to your Collection
+      a.ui.right.floated.circular.icon.button(href="/my-books")
+        i.arrow.left.icon
+    .ui.clearing.hidden.divider
+    .ui.fluid.input
+      input($b="value : query, throttle : 500, change : search" type="text" placeholder="search Google Books...")
+    h3.header Select a Book to add:
+    .ui.divided.selection.list
+      each results
+        +bookPreview
+
+template(name="bookPreview")
+  a.item($b="click:addBook" href="/my-books")
+    img.ui.tiny.image(src="#{volumeInfo.imageLinks.thumbnail}")
+    .content
+      .header #{volumeInfo.title} 
+      .description by #{volumeInfo.authors}
+    
+template(name="listMyBooks")
+  .ui.small.images
+    each books
+      +myBookDisplay
+        
+template(name="myBookDisplay")
+  .ui.rounded.image($b="ref : imageRef")
+    img(src="#{book.imageLink}" style="margin-left : 0px")
+    if requested
+      .ui.orange.ribbon.label
+        i.help.icon
+        | request
+    if accepted
+      .ui.green.ribbon.label
+        i.share.icon
+        | sharing
+  .ui.basic.inverted.popup
+    button.ui.red.circular.icon.button($b="click : remove")
+      i.remove.icon
+    button.ui.yellow.circular.icon.button($b="click : reject, class : { disabled : available }")
+      i.thumbs.down.icon
+    button.ui.green.circular.icon.button($b="click : accept, class : { disabled : available }")
+      i.thumbs.up.icon
+    
+      

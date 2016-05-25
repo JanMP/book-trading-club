@@ -1,0 +1,23 @@
+{
+  "name": "book-trading-club",
+  "private": true,
+  "scripts": {
+    "start": "meteor run"
+  },
+  "dependencies": {
+    "meteor-node-stubs": "~0.2.0"
+  },
+  "description": "a challenge for [freeCodeCamp](http://www.freeCodeCamp.com)",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JanMP/book-trading-club.git"
+  },
+  "author": "Jan Pilgenröder",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/JanMP/book-trading-club/issues"
+  },
+  "homepage": "https://github.com/JanMP/book-trading-club#readme"
+}
