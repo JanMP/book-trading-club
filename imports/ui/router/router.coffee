@@ -1,7 +1,9 @@
 require "./layout.jade"
 require "/imports/ui/navbar/navbar.jade"
+require "/imports/ui/info/info.jade"
 require "/imports/ui/list/list.coffee"
 require "/imports/ui/myBooks/myBooks.coffee"
+require "/imports/ui/settings/settings.coffee"
 
 FlowRouter.route "/",
   name : "home"
@@ -33,8 +35,8 @@ FlowRouter.route "/settings",
     BlazeLayout.render "layout",
       main : "settings"
 
-FlowRouter.route "/help",
-  name : "help"
-  action : ->
-    BlazeLayout.render "layout",
-      main : "help"
+# FlowRouter.route "/help",
+#   name : "help"
+#   action : ->
+#     BlazeLayout.render "layout",
+#       main : "help"

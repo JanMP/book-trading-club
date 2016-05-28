@@ -23,6 +23,8 @@ insecure                # Allow all DB writes from clients (for prototyping)
 http
 check
 
+markdown
+
 mdg:validated-method
 
 coffeescript

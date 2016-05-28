@@ -5,6 +5,7 @@
     "start": "meteor run"
   },
   "dependencies": {
+    "lodash": "^4.13.1",
     "meteor-node-stubs": "~0.2.0"
   },
   "description": "a challenge for [freeCodeCamp](http://www.freeCodeCamp.com)",
@@ -19,5 +20,6 @@
   "bugs": {
     "url": "https://github.com/JanMP/book-trading-club/issues"
   },
-  "homepage": "https://github.com/JanMP/book-trading-club#readme"
+  "homepage": "https://github.com/JanMP/book-trading-club#readme",
+  "devDependencies": {}
 }

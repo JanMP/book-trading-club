@@ -30,7 +30,8 @@ Template.bookDisplay.viewmodel
     @availableCount() > 0 and not @requesting() and
       not @accepted() and not @myOwn()
   mayRequest : -> @available() and Meteor.userId()?
-  mayCancelRequest : -> not @available() and Meteor.userId()?
+  mayCancelRequest : -> Meteor.userId()? and
+    ( @requesting() or @accepted() )
   request : ->
     Meteor.call "BTC.request", bookId : @_id()
   cancelRequest : ->

@@ -119,9 +119,16 @@ if Meteor.isServer
       unless @userId
         throw new Meteor.Error "BTC.removeBook unauthorized"
       book = BookInstances.findOne id
+      bookId = book.bookId
       unless book.ownerId is @userId
         throw new Meteor.Error "BTC.removeBook not Owner"
-      BookInstances.remove id
+      BookInstances.remove id, (error) ->
+        if error then throw error
+        if bookId?
+          bookInstance = BookInstances.findOne bookId : bookId
+          unless bookInstance?
+            Books.remove bookId
+
 
   addBook = new ValidatedMethod
     name : "BTC.addBook"
