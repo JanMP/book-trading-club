@@ -22,7 +22,11 @@ Template.addressForm.viewmodel
   countryChanged : ->
     unless @country() is "United States"
       @state ""
-  save : (event) ->
+  saveEnabled : ->
+    @firstName.valid() and @lastName.valid() and
+    @streetAddress.valid() and @postalCode.valid() and
+    @city.valid() and @state.valid() and @country.valid()
+  save : (event) -> #Done:30 handle validation errors
     event.preventDefault()
     console.log @firstName(), @firstName.invalid(), @firstName.message()
     address =
@@ -33,7 +37,10 @@ Template.addressForm.viewmodel
       city : @city()
       state : if @country() is "United States" then @state() else ""
       country : @country()
-    Meteor.call "BTC.saveAddress", address
+    Meteor.call "BTC.saveAddress", address, (error, result) ->
+      if error
+        alert "There was an error, while trying to save your address
+        to the db: #{error.message}"
   autorun : # we are handling the custom semantic ui selects here
     [
       ->

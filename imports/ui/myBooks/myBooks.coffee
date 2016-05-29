@@ -8,6 +8,9 @@ url = "https://www.googleapis.com/books/v1/volumes?q="
 
 Template.myBooks.viewmodel
   books : -> BookInstances.find ownerId : Meteor.userId()
+  loading : -> not @templateInstance.subscriptionsReady()
+  onCreated : ->
+    @templateInstance.subscribe "BTC.myBooks"
 
 Template.addBook.viewmodel
   query : ""
@@ -27,6 +30,7 @@ Template.bookPreview.viewmodel
 
 Template.myBookDisplay.viewmodel
   book : -> Books.findOne @bookId()
+  loading : -> not @templateInstance.subscriptionsReady()
   available : -> @status() is "available"
   requested : -> @status() is "requested"
   accepted : -> @status() is "accepted"
@@ -43,6 +47,8 @@ Template.myBookDisplay.viewmodel
       position : "bottom center"
       distanceAway : -80
       on : "click"
+  onCreated : ->
+    @templateInstance.subscribe "BTC.book", @bookId()
 
 Template.myRequests.viewmodel
   requests : ->
@@ -58,3 +64,5 @@ Template.myRequests.viewmodel
         $in : requestIds
   gotRequests : ->
     @requests().count() > 0
+  autorun : ->
+    @templateInstance.subscribe "BTC.myRequests"

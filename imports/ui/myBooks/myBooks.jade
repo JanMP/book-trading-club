@@ -3,7 +3,7 @@ template(name="myBooks-page")
   +myBooks
 
 template(name="myBooks")
-  .ui.clearing.container.segment
+  .ui.clearing.container.segment($b="class : {loading : loading}")
     h2.header My Books
       a.ui.right.floated.circular.icon.button(href="/add-book")
         i.large.icons
@@ -35,7 +35,7 @@ template(name="bookPreview")
       .description by #{volumeInfo.authors}
         
 template(name="myBookDisplay")
-  .ui.rounded.image($b="ref : imageRef")
+  .ui.image($b="ref : imageRef, class : {loading : loading}")
     img(src="#{book.imageLink}" style="margin-left : 0px")
     if requested
       .ui.orange.ribbon.label

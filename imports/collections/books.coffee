@@ -37,6 +37,38 @@ BookInstances.attachSchema BookInstances.schema
 exports.BookInstances = BookInstances
 
 if Meteor.isServer
+
+  Meteor.publish "BTC.list", ->
+    Books.find()
+
+  Meteor.publish "BTC.instances", (bookId) ->
+    new SimpleSchema
+      bookId :
+        type : String
+    .validate { bookId }
+    BookInstances.find bookId : bookId
+
+  Meteor.publish "BTC.myBooks", ->
+    BookInstances.find ownerId : @userId
+
+  Meteor.publish "BTC.myRequests", ->
+    bookInstances = BookInstances.find
+      requesterId : @userId
+      status :
+        $in : [ "requested", "accepted" ]
+    requestIds = bookInstances.fetch().map (e) -> e.bookId
+    books = Books.find
+      _id :
+        $in : requestIds
+    [bookInstances, books]
+
+  Meteor.publish "BTC.book", (bookId) ->
+    new SimpleSchema
+      bookId :
+        type : String
+    .validate { bookId }
+    Books.find bookId
+
   request = new ValidatedMethod
     name : "BTC.request"
     validate :

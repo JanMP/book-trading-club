@@ -37,7 +37,10 @@ Template.bookDisplay.viewmodel
   cancelRequest : ->
     Meteor.call "BTC.cancelRequest", bookId : @_id()
   info : ->
-    alert "I want to know more about this book."
+    #Done:0 add usefull functionality to info button
+    window.open("https://books.google.com/books?id=#{@googleId()}")
+  onCreated : ->
+    @templateInstance.subscribe "BTC.instances", @_id()
   onRendered : ->
     @imageRef.popup
       inline : true
