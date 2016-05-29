@@ -64,5 +64,5 @@ Template.myRequests.viewmodel
         $in : requestIds
   gotRequests : ->
     @requests().count() > 0
-  autorun : ->
+  onCreated : ->
     @templateInstance.subscribe "BTC.myRequests"

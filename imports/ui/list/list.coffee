@@ -3,10 +3,8 @@
 require "/imports/ui/bookDisplay/bookDisplay.coffee"
 require "./list.jade"
 
-#Meteor.subscribe "BTC.list"
-
 Template.list.viewmodel
   books : -> Books.find()
   loading : -> not @templateInstance.subscriptionsReady()
-  autorun : ->
+  onCreated : ->
     @templateInstance.subscribe "BTC.list"
